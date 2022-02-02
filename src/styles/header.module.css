@@ -1,9 +1,9 @@
-.header {
+.style {
     background-color: rgb(154, 16, 209);
     text-align: center;
     padding: 20px 0;
 }
-.header >a {
+.style >a {
     margin: 0 10px;
     color: white;
     text-decoration: none;
@@ -12,6 +12,6 @@
     border-radius: 5px;
 }
 
-.header >a:hover {
+.style >a:hover {
     color: rgb(203, 214, 107)
 }
