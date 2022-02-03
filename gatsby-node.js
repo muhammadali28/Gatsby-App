@@ -29,6 +29,7 @@ exports.createPages = async ({ actions }) => {
 }
 */
 
+
 var path = require('path');
 
 exports.createPages = async ({actions, graphql}) => {
