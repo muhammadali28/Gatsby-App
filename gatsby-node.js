@@ -1,6 +1,6 @@
 // Implement the Gatsby API “onCreatePage”. This is
 // called after every page is created.
-exports.onCreatePage = async ({ page, actions }) => {
+/*exports.onCreatePage = async ({ page, actions }) => {
   const { createPage } = actions
 
   // Only update the `/app` page.
@@ -13,7 +13,7 @@ exports.onCreatePage = async ({ page, actions }) => {
     createPage(page)
   }
 }
-
+*/
 
 /*
 
@@ -28,3 +28,35 @@ exports.createPages = async ({ actions }) => {
   });
 }
 */
+
+var path = require('path');
+
+exports.createPages = async ({actions, graphql}) => {
+    const {createPage} = actions;
+
+    const result = await graphql(`
+    {
+        allContentfulElectronics {
+            nodes {
+              slug
+              title
+              desc {
+                json
+              }
+            }
+          }
+    }
+    `)
+
+    console.log(JSON.stringify(result));
+
+    result.data.allContentfulElectronics.nodes.forEach((obj)=>{
+        createPage({
+            path: `/product/${obj.slug}`,
+            component: path.resolve('./src/templates/products.tsx'),
+            context: {
+                itemDetails: obj
+            }
+        })
+    })
+}
